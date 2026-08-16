@@ -14,7 +14,7 @@ regex==2026.1.15
 python-dotenv==1.2.2
 
 crewai==1.15.5
-crewai-tools==1.15.4
+crewai-tools==1.15.5
 
 groq==0.37.1
 tavily-python==0.7.27
