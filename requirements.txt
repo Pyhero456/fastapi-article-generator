@@ -28,10 +28,10 @@ charset-normalizer==3.4.9
 chromadb==1.1.1
 click==8.4.2
 colorama==0.4.6
-crewai==1.15.15
-crewai-cli==1.15.15
-crewai-core==1.15.15
-crewai-tools==1.15.15
+crewai==1.15.5
+crewai-cli==1.15.5
+crewai-core==1.15.5
+crewai-tools==1.15.5
 cryptography==50.0.0
 dataclasses-json==0.6.7
 ddgs==9.14.4
