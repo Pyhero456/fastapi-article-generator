@@ -47,7 +47,16 @@ def menu():
 
 Base.metadata.create_all(bind= engine)
 
-
+@app.on_event("startup")
+def create_admin_user():
+    from app.database import SessionLocal
+    db = SessionLocal()
+    user = db.query(User).filter(User.username == "joel").first()
+    if user and not user.is_admin:
+        user.is_admin = True
+        db.commit()
+        print(f"✅ {user.username} is now admin!")
+    db.close()
 
 @app.post("/register", response_model= UserResponse)
 @limiter.limit("10/minute")
