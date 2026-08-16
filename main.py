@@ -16,6 +16,7 @@ from slowapi.errors import RateLimitExceeded
 from fastapi import Request
 from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
