@@ -2,6 +2,7 @@ fastapi==0.141.1
 uvicorn==0.52.1
 streamlit==1.50.0
 SQLAlchemy==2.0.51
+slowapi==0.1.10
 
 python-jose==3.5.0
 python-multipart==0.0.32
