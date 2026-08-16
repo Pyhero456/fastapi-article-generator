@@ -1,0 +1,18 @@
+research_task:
+    description: >
+      Find and gather information on a given topic: {topic}, providing accurate and relevant data for creating an article (iNCLUDE CITATIONS FOR THE INFORMATION YOU PROVIDE). current date is {current_date}
+    expected_output: >
+      A comprehensive collection of accurate and relevant information on the specified topic, organized in a structured format suitable for article creation.IT MUST CONTAIN NUMBERED CITATIONS SUCH AS [1], [2], [3] AND A SOURCES SECTION CONTAINING THE URLS(LINKS) USED.
+
+writer_task:
+    description: >
+      Write a comprehensive article based on the research findings provided by the research agent, ensuring clarity, coherence, and engagement for the target audience.It shouldnt be less than 800 words.
+    expected_output: >
+      A well-structured and engaging article that effectively communicates the research findings to the target audience.
+
+editor_task:
+    description: >
+      Review and edit the article written by the writer agent, ensuring accuracy, grammar, style, and overall quality of the content. also set "user_id" to 0
+    expected_output: >
+      A polished and refined article that meets high standards of accuracy, grammar, style, and overall quality.
+

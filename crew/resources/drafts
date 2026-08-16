@@ -1,0 +1,32 @@
+research_task:
+  description: >
+    Find and gather information on a given topic: {topic}, providing accurate and relevant data for creating an article (INCLUDE CITATIONS FOR THE INFORMATION YOU PROVIDE). current date is {current_date}
+  expected_output: |
+    {
+      "research_findings": "A comprehensive collection of accurate and relevant information on the specified topic",
+      "citations": ["[1]", "[2]", "[3]"],
+      "sources": ["https://source1.com", "https://source2.com"],
+      "format": "Organized in a structured format suitable for article creation"
+    }
+
+writer_task:
+  description: >
+    Write a comprehensive article based on the research findings provided by the research agent, ensuring clarity, coherence, and engagement for the target audience. 800 words plus
+  expected_output: |
+    {
+      "article_title": "Engaging title here",
+      "article_content": "Full article text in markdown format (800+ words)",
+      "word_count": 800,
+      "target_audience": "Description of target audience"
+    }
+
+editor_task:
+  description: >
+    Review and edit the article written by the writer agent, ensuring accuracy, grammar, style, and overall quality of the content.
+  expected_output: |
+    {
+      "final_article": "Polished and refined article with corrections applied",
+      "edits_made": ["List of key edits and improvements"],
+      "quality_score": "Rating of final quality",
+      "status": "ready_for_publishing"
+    }

@@ -1,0 +1,4 @@
+→ Researcher: Searches web, finds 5 articles, takes notes
+→ Writer: Reads notes, writes 800-word draft
+→ Editor: Reviews draft, fixes grammar, improves flow
+→ Output: Final polished blog post with sources

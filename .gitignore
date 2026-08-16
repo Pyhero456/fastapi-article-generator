@@ -1,0 +1,39 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+app/__pycache__/
+crew/__pycache__/
+
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variables (CRITICAL — keep this)
+.env
+.env.*
+*.env
+crew/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data files
+*.db
+*.sqlite
+data/
+*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CrewAI (optional)
+crew/logs/
+crew/.crewai/
