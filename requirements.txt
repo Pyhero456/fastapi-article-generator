@@ -1,43 +1,20 @@
-# Python 3.12
-
-# Web app
 fastapi==0.141.1
 uvicorn==0.52.1
 streamlit==1.39.0
-requests==2.34.2
-regex==2026.1.15
-
-# Database / authentication
 SQLAlchemy==2.0.51
-aiosqlite==0.21.0
-python-multipart==0.0.32
+
 python-jose==3.5.0
+python-multipart==0.0.32
 passlib==1.7.4
 bcrypt==4.0.1
 pwdlib==0.3.1
-email-validator==2.3.0
 
-# Environment / validation
+requests==2.34.2
+regex==2026.1.15
 python-dotenv==1.2.2
-pydantic==2.12.5
 
-# CrewAI
 crewai==1.15.5
 crewai-tools==1.15.5
 
-# LLM / search
 groq==0.37.1
 tavily-python==0.7.27
-ddgs==9.14.4
-firecrawl-py==1.1.0
-
-# CrewAI tools used by the project
-beautifulsoup4==4.13.5
-pytube==15.0.0
-youtube-transcript-api==1.2.4
-python-docx==1.2.0
-PyMuPDF==1.26.7
-tiktoken==0.8.0
-
-# Payments
-stripe==15.5.0
