@@ -1,6 +1,6 @@
 fastapi==0.141.1
 uvicorn==0.52.1
-streamlit==1.39.0
+streamlit==1.50.0
 SQLAlchemy==2.0.51
 
 python-jose==3.5.0
@@ -15,8 +15,6 @@ python-dotenv==1.2.2
 
 crewai==1.15.5
 crewai-tools==1.15.5
-instructor==1.15.4
-openai==2.54.0
 
 groq==0.37.1
 tavily-python==0.7.27
