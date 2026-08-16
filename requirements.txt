@@ -20,7 +20,6 @@ email-validator==2.3.0
 # Environment / validation
 python-dotenv==1.2.2
 pydantic==2.12.5
-pydantic-settings==2.14.2
 
 # CrewAI
 crewai==1.15.5
