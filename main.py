@@ -15,11 +15,12 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from fastapi import Request
 from datetime import datetime, timezone, timedelta
+from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
+load_dotenv(dotenv_path="crew/.env")
 
 
 app = FastAPI(
@@ -47,16 +48,6 @@ def menu():
 
 Base.metadata.create_all(bind= engine)
 
-@app.on_event("startup")
-def create_admin_user():
-    from app.database import SessionLocal
-    db = SessionLocal()
-    user = db.query(User).filter(User.username == "joel").first()
-    if user and not user.is_admin:
-        user.is_admin = True
-        db.commit()
-        print(f"✅ {user.username} is now admin!")
-    db.close()
 
 @app.post("/register", response_model= UserResponse)
 @limiter.limit("10/minute")
@@ -166,3 +157,28 @@ app.include_router(router_1)
 app.include_router(router, dependencies=[Depends(require_api_access)])
 app.include_router(router_3, dependencies=[Depends(require_api_access)])
 app.include_router(router_2)
+
+@app.post("/setup-admin")
+def setup_admin(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    admin_username = os.getenv("ADMIN_USERNAME")
+
+    if not admin_username:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="ADMIN_USERNAME is not configured"
+        )
+
+    if current_user.username != admin_username:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized"
+        )
+
+    current_user.is_admin = True
+    db.commit()
+    db.refresh(current_user)
+
+    return {"message": "Admin access granted"}
