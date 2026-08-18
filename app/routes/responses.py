@@ -11,7 +11,9 @@ from fastapi import Request
 from sqlalchemy.orm import Session
 from app.database import get_db
 
-ACCOUNT = "214812779958, Grey"
+ACCOUNT_NUMBER = "214812779958"
+ACCOUNT_NAME = "olufunke oluwakemi oluwole"
+BANK_NAME = "LEAD"
 
 router = APIRouter(prefix = "/generator", tags= ["Generate"],dependencies=[Depends(get_current_user)])
 router_1 = APIRouter(prefix="/payments", tags = ["Payments"], dependencies = [Depends(get_current_user)])
@@ -35,7 +37,9 @@ def create_payment(current_user:User = Depends(get_current_user), db:Session=Dep
         "reference" :payment.reference,
         "amount" : "$800.00",
         "status": payment.status,
-        "account":ACCOUNT,
+        "account_name":ACCOUNT_NAME,
+        "account_number":ACCOUNT_NUMBER,
+        "bank_name":BANK_NAME,
         "instructions" :("Send $800 USD to the provided payment account"
                          f"using reference {payment.reference}")
     }
@@ -44,7 +48,6 @@ def create_payment(current_user:User = Depends(get_current_user), db:Session=Dep
 
 
 @router.get("", response_model = List[ArticleOut])
-@limiter.limit("5/minute")
 def get_articles(request:Request,current_user: User = Depends(get_current_user)):
     articles = load_data()
     user_articles = [a for a in articles if a.get("user_id") == current_user.id]
@@ -89,7 +92,9 @@ async def create_article(payload: ArticleCreate, current_user: User = Depends(ge
                 "message":"Monthly article limit reached",
                 "amount_cents":overage_price,
                 "reference":reference,
-                "account":ACCOUNT,
+                "account_name":ACCOUNT_NAME,
+                "account_number":ACCOUNT_NUMBER,
+                "bank_name":BANK_NAME,
                 "instructions":(
                     f"Send ${overage_price/100:.2f} USD"
                     f"using reference {reference}"
@@ -123,7 +128,7 @@ def update_article_title(article_title:str, payload:ArticleUpdate, current_user:
         detail = "Article Not Found...Check Spellings"
     )
 
-@router.delete("/{article_title}", status_code= status.HTTP_204_NO_CONTENT)
+@router.delete("/{article_title}", status_code= status.HTTP_200_OK)
 def delete_article(article_title:str,current_user: User = Depends(get_current_user)):
     articles = load_data()
 
@@ -249,7 +254,7 @@ def approve_subscription(
 def approve_overage(reference:str, current_user:User = Depends(get_current_user), db:Session = Depends(get_db)):
     subscription = db.query(Subscription).filter(Subscription.user_id == current_user.id).first()
     if not current_user.is_admin:
-        raise HTTPException(status_code=status.HTTP_403, detail="Admin access required")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
     payment = db.query(Payment).filter(Payment.reference == reference).first()
     if not payment:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Payment not found")
@@ -295,7 +300,9 @@ def create_subscription_payment(
         "reference": payment.reference,
         "plan": data.plan.value,
         "amount_cents": payment.amount_cents,
-        "account":ACCOUNT,
+        "account_name":ACCOUNT_NAME,
+        "account_number":ACCOUNT_NUMBER,
+        "bank_name":BANK_NAME,
         "status": payment.status,
         "instructions": (
             f"Send ${amount / 100:.2f} USD "
