@@ -144,6 +144,12 @@ def get_me(current_user = Depends(get_current_user)):
     return {
         "id":current_user.id,
         "username":current_user.username
+        "api_access": current_user.api_access,
+        "subscription_active": (
+            subscription is not None
+            and subscription.status == "active"
+            and subscription.expires_at > datetime.utcnow()
+        )
     }
 
 
