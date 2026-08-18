@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.middleware.timing import timing_middleware
 from sqlalchemy.orm import Session
 from app.database import Base, engine, get_db
-from app.models import User, RefreshToken
+from app.models import User, RefreshToken, Subscription
 from app.auth import(hash_password, verify_password, create_access_token, create_refresh_token, limiter, get_current_user, hash_refresh_token)
 from datetime import timedelta
 from fastapi import HTTPException, status, Depends
