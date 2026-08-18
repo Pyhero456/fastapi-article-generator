@@ -140,15 +140,16 @@ def logout(data:RefreshRequest, db:Session = Depends(get_db)):
 
 
 @app.get("/me")
-def get_me(current_user = Depends(get_current_user)):
+def get_me(current_user = Depends(get_current_user), db:Session = Depends(get_db)):
     subscription = (
         db.query(Subscription)
         .filter(Subscription.user_id == current_user.id)
         .first()
     )
+
     return {
-        "id":current_user.id,
-        "username":current_user.username,
+        "id": current_user.id,
+        "username": current_user.username,
         "api_access": current_user.api_access,
         "subscription_active": (
             subscription is not None
@@ -156,7 +157,6 @@ def get_me(current_user = Depends(get_current_user)):
             and subscription.expires_at > datetime.utcnow()
         )
     }
-
 
 def require_api_access(current_user:User = Depends(get_current_user)):
     if not current_user.api_access:
