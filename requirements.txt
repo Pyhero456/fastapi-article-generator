@@ -19,3 +19,4 @@ crewai-tools==1.15.5
 
 groq==0.37.1
 tavily-python==0.7.27
+psycopg2
