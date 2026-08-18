@@ -141,6 +141,11 @@ def logout(data:RefreshRequest, db:Session = Depends(get_db)):
 
 @app.get("/me")
 def get_me(current_user = Depends(get_current_user)):
+    subscription = (
+        db.query(Subscription)
+        .filter(Subscription.user_id == current_user.id)
+        .first()
+    )
     return {
         "id":current_user.id,
         "username":current_user.username,
